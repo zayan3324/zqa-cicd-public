@@ -1,0 +1,11 @@
+pipeline {
+  agent any
+  options { timeout(time: 10, unit: 'MINUTES') }
+  stages {
+    stage('smoke') {
+      steps {
+        sh 'echo zqa-pc-j1-smoke start; date -u; sleep 180; echo zqa-pc-j1-smoke done'
+      }
+    }
+  }
+}
