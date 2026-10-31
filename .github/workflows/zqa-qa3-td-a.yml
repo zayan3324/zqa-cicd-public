@@ -1,0 +1,14 @@
+name: zqa-qa3-td-a
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: action
+        required: false
+        default: apply
+        type: string
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "zqa-qa3 throwaway, action=${{ github.event.inputs.action }}, no infrastructure"
