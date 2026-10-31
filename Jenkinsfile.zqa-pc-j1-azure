@@ -1,0 +1,18 @@
+pipeline {
+  agent any
+  options { timeout(time: 5, unit: 'MINUTES') }
+  stages {
+    stage('claims') {
+      steps {
+        withCredentials([string(credentialsId: 'zaysa-oidc-azure', variable: 'IDT')]) {
+          sh '''
+            set +x
+            p=$(printf '%s' "$IDT" | cut -d. -f2 | tr '_-' '/+')
+            while [ $(( ${#p} % 4 )) -ne 0 ]; do p="${p}="; done
+            printf '%s' "$p" | base64 -d | (python3 -c 'import sys,json; d=json.load(sys.stdin); print(json.dumps({k:d.get(k) for k in ("iss","sub","aud","job_name","build_number")},indent=1))' 2>/dev/null || cat)
+          '''
+        }
+      }
+    }
+  }
+}
