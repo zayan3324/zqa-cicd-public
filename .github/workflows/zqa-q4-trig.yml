@@ -1,0 +1,18 @@
+name: zqa-q4-trig
+
+on:
+  push:
+    branches: [zqa-q4-trig]
+    paths: [probe/**]
+  pull_request:
+    branches: [zqa-q4-base]
+  schedule:
+    - cron: '*/5 * * * *'
+    - cron: '7 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "zqa-q4 trigger probe event=${{ github.event_name }} ref=${{ github.ref }}"
