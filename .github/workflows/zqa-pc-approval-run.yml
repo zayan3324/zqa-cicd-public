@@ -1,8 +1,0 @@
-name: p
-on: workflow_dispatch
-jobs:
-  a:
-    runs-on: ubuntu-latest
-    environment: zqa-pc-approval
-    steps:
-      - run: echo hi
