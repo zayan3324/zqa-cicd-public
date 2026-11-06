@@ -1,0 +1,23 @@
+name: zqa-pc-1205-1793991001
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment (development only)'
+        type: choice
+        required: true
+        default: development
+        options:
+          - development
+      action:
+        description: 'plan only - this no-op workflow has no apply'
+        type: choice
+        required: true
+        default: plan
+        options:
+          - plan
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "zqa-pc no-op environment=${{ inputs.environment }} action=${{ inputs.action }}"
